@@ -1,0 +1,44 @@
+name: Publish
+
+on: 
+  push:
+    branches: 
+      - main
+
+jobs:
+  build_and_test:
+    runs-on: windows-latest
+
+    steps:
+        # Checkout branche
+        - name: Checkout
+          uses: actions/checkout@v3.0.2
+
+        # Use lastest .NET Core SDK for build
+        - name: Setup .NET Core SDK
+          uses: actions/setup-dotnet@v2.1.0
+          with:
+            dotnet-version: 6.0.x
+        
+        # Restore dependencies in the solution
+        - name: Restore dependencies
+          run: dotnet restore
+
+        # Setup NuGet to get packages
+        - name: Setup NuGet
+          uses: NuGet/setup-nuget@v1.0.6
+          with:
+            nuget-version: latest
+
+        # Restore NuGet packages if present
+        - name: Restore NuGet packages
+          run: nuget restore ./TestGit/Project.sln
+        
+        # Build project
+        - name: Build project
+          run: dotnet build ./TestGit/Project.sln --configuration Release  --no-restore
+        
+       # Publish Applicaton
+        - name: publish
+          run: dotnet publish ./TestGit/Project.sln --configuration Release --no-build
+          
