@@ -32,13 +32,13 @@ jobs:
 
         # Restore NuGet packages if present
         - name: Restore NuGet packages
-          run: nuget restore ./TestGit/Project.sln
+          run: nuget restore #./TestGit/Project.sln
         
         # Build project
         - name: Build project
-          run: dotnet build ./TestGit/Project.sln --configuration Release  --no-restore
+          run: dotnet build --configuration Release --no-restore #./TestGit/Project.sln
         
        # Publish Applicaton
         - name: publish
-          run: dotnet publish ./TestGit/Project.sln --configuration Release --no-build
+          run: dotnet publish  --configuration Release --no-build #./TestGit/Project.sln
           
