@@ -1,0 +1,62 @@
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.index {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.index-container {
+  background-color: rgba(255, 99, 71, 0.2) ;
+  margin-top: 5rem;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  width: 80vw;
+}
+
+.createUser-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse; /* remove the space between cells */
+  width: 100%; /* make the table take up the full width of its container */
+}
+
+th,
+td {
+  border: 1px solid black; /* add a border to all cells */
+  text-align: left; /* align the text to the left */
+  padding: 8px; /* add padding to the cells */
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* add a background color to every even row */
+}
+
+th {
+  background-color: tomato; /* add a background color to the table header cells */
+  color: white; /* make the text in the table header cells white */
+}

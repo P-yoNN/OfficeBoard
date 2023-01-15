@@ -1,0 +1,44 @@
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.post {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.post-container {
+  background-color: tomato;
+  margin-top: 5rem;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  width: 30vw;
+}
+
+.post-header {
+  margin-bottom: 3rem;
+}
+
+p {
+  margin-bottom: 2rem;
+}
