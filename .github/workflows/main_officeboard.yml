@@ -9,6 +9,10 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  AZURE_WEBAPP_NAME: OfficeBoard
+  AZURE_WEBBAPP_PACKAGE_PATH: ./publish
+  
 jobs:
   build:
     runs-on: windows-latest
@@ -22,20 +26,20 @@ jobs:
           dotnet-version: '3.1'
           include-prerelease: true
 
-      - name: Build project
-        run: dotnet build --configuration Release --no-restore #./TestGit/Project.sln
+      - name: build project
+        run: dotnet build --configuration -c Release -o ${{env.DOTNET_ROOT}}/Project.sln
 
       #- name: dotnet publish
-        #run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        #run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/Project.sln
         
       - name: publish
-        run: dotnet publish  --configuration Release --no-build #./TestGit/Project.sln --output '${{env.AZURE_WEBBAPP_PACKAGE_PATH}}'
+        run: dotnet publish  --configuration Release --no-build #./OfficeBoard/Project.sln --output '${{env.AZURE_WEBBAPP_PACKAGE_PATH}}'
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{env.DOTNET_ROOT}}/Project.sln
 
   deploy:
     runs-on: windows-latest
