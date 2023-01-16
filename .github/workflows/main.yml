@@ -4,7 +4,10 @@ on:
   push:
     branches: 
       - main
-
+env:
+  AZURE-WEBAPP-NAME: OfficeBoard
+  AZURE-WEBAPP-PACKAGE-PATH: "./pulish"
+  
 jobs:
   build_and_test:
     runs-on: windows-latest
@@ -38,7 +41,14 @@ jobs:
         - name: Build project
           run: dotnet build --configuration Release --no-restore #./TestGit/Project.sln
         
-       # Publish Applicaton
+        # Publish Applicaton
         - name: publish
-          run: dotnet publish  --configuration Release --no-build #./TestGit/Project.sln
-          
+          run: dotnet publish  --configuration Release --no-build #./TestGit/Project.sln --output '${{env.AZURE-WEBAPP-PACKAGE-PATH}}'
+        
+        # Deploy Applicaton
+        - name: Deployment
+          uses: azure/webapps-deploy@v2
+          with:
+            app-name: ${{env.AZURE-WEBAPP-NAME}}
+            publish-profile: ${{secrets.AZURE_PUBLISH_PROFILE}}
+            package: '${{env.AZURE-WEBAPP-PACKAGE-PATH}}'
