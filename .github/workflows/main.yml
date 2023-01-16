@@ -5,7 +5,8 @@ on:
     branches: 
       - main
 env:
-  AZURE-WEBAPP-NAME: OfficeBoard
+  AZURE_WEBAPP_NAME: OfficeBoard
+  # AZURE_WEBBAPP_PACKAGE_PATH: ./publish
   
 jobs:
   build_and_test:
@@ -42,12 +43,12 @@ jobs:
         
         # Publish Applicaton
         - name: publish
-          run: dotnet publish  --configuration Release --no-build #./TestGit/Project.sln --output '${{env.AZURE-WEBAPP-PACKAGE-PATH}}'
+          run: dotnet publish  --configuration Release --no-build #./TestGit/Project.sln --output '${{env.AZURE_WEBBAPP_PACKAGE_PATH}}'
         
         # Deploy Applicaton
         - name: Deployment
           uses: azure/webapps-deploy@v2
           with:
-            app-name: ${{env.AZURE-WEBAPP-NAME}}
+            app-name: ${{env.AZURE_WEBAPP_NAME}}
             publish-profile: ${{secrets.AZURE_PUBLISH_PROFILE}}
-            package: '${{env.AZURE-WEBAPP-PACKAGE-PATH}}'
+            # package: '${{env.AZURE_WEBBAPP_PACKAGE_PATH}'
