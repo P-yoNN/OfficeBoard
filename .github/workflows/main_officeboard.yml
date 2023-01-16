@@ -22,12 +22,15 @@ jobs:
           dotnet-version: '3.1'
           include-prerelease: true
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore #./TestGit/Project.sln
 
-      - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-
+      #- name: dotnet publish
+        #run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        
+      - name: publish
+        run: dotnet publish  --configuration Release --no-build #./TestGit/Project.sln --output '${{env.AZURE_WEBBAPP_PACKAGE_PATH}}'
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
