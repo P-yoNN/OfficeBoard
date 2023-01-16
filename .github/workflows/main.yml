@@ -6,7 +6,7 @@ on:
       - main
 env:
   AZURE-WEBAPP-NAME: OfficeBoard
-  AZURE-WEBAPP-PACKAGE-PATH: "./pulish"
+  AZURE-WEBAPP-PACKAGE-PATH: "./publish"
   
 jobs:
   build_and_test:
